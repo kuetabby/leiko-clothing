@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from '@reach/router'
 import './styles.scss'
 
 function Items(props) {
   return (
-    <div className={`${props.size} menu-item`}>
+    <Link className={`${props.size} menu-item`} to={props.link}>
       <div
         style={{
           backgroundImage: `url(${props.image})`
@@ -14,7 +15,7 @@ function Items(props) {
         <h1 className="title">{props.title}</h1>
         <p className="subtitle">Shop Now!</p>
       </div>
-    </div>
+    </Link>
   )
 }
 
