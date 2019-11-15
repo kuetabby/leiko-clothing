@@ -1,6 +1,6 @@
 import React from 'react'
-import './styles.scss'
 
+import { HomePageContainer, DirectoryMenu } from './styles'
 import MenuItem from 'components/menu_item'
 
 const initialState = [
@@ -41,8 +41,8 @@ const initialState = [
 function Directory(props) {
   const category = initialState
   return (
-    <div className="homepage">
-      <div className="directory-menu">
+    <HomePageContainer>
+      <DirectoryMenu>
         {category.map(item => (
           <MenuItem
             key={item.id}
@@ -52,8 +52,8 @@ function Directory(props) {
             size={item.size}
           />
         ))}
-      </div>
-    </div>
+      </DirectoryMenu>
+    </HomePageContainer>
   )
 }
 
