@@ -4,6 +4,8 @@ import './index.scss'
 import Input from '../dumb/input'
 import Button from '../dumb/button'
 
+import { auth, signInWithGoogle } from 'utils/firebase'
+
 const initialState = {
   email: '',
   password: ''
@@ -17,11 +19,26 @@ function SignIn(params) {
     setState(prevState => ({ ...prevState, [id]: value }))
   }
 
+  const handleStateClear = () => {
+    setState({ ...initialState })
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      await auth.signInWithEmailAndPassword(email, password)
+      handleStateClear()
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <div className="sign-in">
       <h2>I already have an account</h2>
       <span>Sign in with your email & password</span>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           id="email"
           name="email"
@@ -38,7 +55,12 @@ function SignIn(params) {
           value={password}
           handleStateChange={handleStateChange}
         />
-        <Button type="submit">Submit Form</Button>
+        <div className="buttons">
+          <Button type="submit">Sign In</Button>
+          <Button onClick={signInWithGoogle} isGoogleSignIn>
+            Sign In with Google
+          </Button>
+        </div>
       </form>
     </div>
   )

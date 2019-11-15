@@ -10,8 +10,8 @@ function Preview({ title, items }) {
       <div className="preview">
         {items
           .filter((item, idx) => idx < 4)
-          .map(({ id, ...other }) => (
-            <Item key={id} {...other} />
+          .map(item => (
+            <Item key={item.id} item={item} />
           ))}
       </div>
     </div>
