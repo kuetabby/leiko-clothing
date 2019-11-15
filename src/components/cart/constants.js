@@ -1,0 +1,7 @@
+export const TOGGLE_CART = 'TOGGLE_CART'
+
+export const ADD_ITEM_CART = 'ADD_ITEM_CART'
+export const REMOVE_ITEM_CART = 'REMOVE_ITEM_CART'
+
+export const ADD_QUANTITY = 'ADD_QUANTITY'
+export const REMOVE_QUANTITY = 'REMOVE_QUANTITY'
