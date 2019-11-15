@@ -1,27 +1,41 @@
 import React from 'react'
-import { Link } from '@reach/router'
-import './index.scss'
+import { useSelector } from 'react-redux'
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionLink
+} from './styles'
+import { auth } from 'utils/firebase'
+
+import './styles'
 
 import { ReactComponent as Svg } from 'assets/crown.svg'
+import CartItem from 'components/cart/cart_item'
+import { DisplayHidden } from '../cart/selectors'
+import { selectUser } from 'containers/selectors'
 
-function Header(params) {
+function Header() {
+  const user = useSelector(selectUser)
   return (
-    <div className="header">
-      <Link className="logo-container" to="/">
-        <Svg className="logo" />
-      </Link>
-      <div className="options">
-        <Link className="option" to="/">
-          HOME
-        </Link>
-        <Link className="option" to="/shop">
-          SHOP
-        </Link>
-        <Link className="option" to="/contact">
-          CONTACT
-        </Link>
-      </div>
-    </div>
+    <HeaderContainer>
+      <LogoContainer to="/">
+        <Svg />
+      </LogoContainer>
+      <OptionsContainer>
+        <OptionLink to="/">HOME</OptionLink>
+        <OptionLink to="/shop">Shop</OptionLink>
+        {user ? (
+          <OptionLink as="div" onClick={() => auth.signOut()}>
+            Sign Out
+          </OptionLink>
+        ) : (
+          <OptionLink to="/signin">Sign In</OptionLink>
+        )}
+        <CartItem />
+      </OptionsContainer>
+      <DisplayHidden />
+    </HeaderContainer>
   )
 }
 
